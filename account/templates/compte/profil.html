@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMMO-PLUS</title>
+    <link rel="stylesheet" href="{% static 'css/style5.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script >
+        function openNav(){
+            document.getElementById("mySidebar").style.width="100vw";
+            document.querySelector("body").style.overflow= "hidden"
+        
+        }
+        
+        //définir la la largeur de la sidebar a 0  et faire un overflow auto
+        
+        function closeNav(){
+            document.getElementById("mySidebar").style.width="0";
+            document.querySelector("body").style.overflow= "auto"
+        }
+    </script>
+</head>
+<body>
+    <section class="header-home">
+        <!-- menu -->
+        <header>
+            <div class="logo_link">
+                <a href="#" class="logo">IMMO-PLUS</a>
+                <div class="menu_link">
+                    <a href="{% url 'home' %}">Acceuil</a>
+                    <a href="{% url 'services' %}">Service</a>
+                    <a href="{% url 'favoris' %}">Favoris</a>
+                    <a href="{% url 'historique' %}">Historique</a>
+                    <a href="#">Profil</a>
+                </div>
+            </div>
+             
+            <!-- responsive menu -->
+                 <div class="sidebar" id="mySidebar">
+                    <div class="closebtn"  onclick="closeNav()">
+                        <img src="images/close.png">
+                    </div>
+                    <a href="{% url 'home' %}">Acceuil</a>
+                    <a href="{% url 'services' %}">Service</a>
+                    <a href="{% url 'favoris' %}">Favoris</a>
+                    <a href="{% url 'historique' %}">Historique</a>
+                    <a href="#">Profil</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'deconnexion' %}">Deconnexion</a>
+                    {% else %}
+                    <a href="{% url 'singin' %}">Se connecter</a>
+                    <a href="{% url 'singup' %}">s'inscrire</a>
+                    {% endif %}
+                 </div>
+
+                 <div id="main">
+                    <button class="openbtn" onclick="openNav()">
+                        <img src="images/menu.png">
+                        Menu
+                    </button>
+                 </div>
+            <!-- responsive menu -->
+
+            <div class="link_buttons text-right">
+                {% if user.is_authenticated %}
+                <a href="{% url 'deconnexion' %}" class="orange_link" style="color: white;">deconnexion</a>
+                {% else %}
+                <a href="{% url 'singin' %}">Se connecter</a>
+                <a href="{% url 'singup' %}" class="orange_link">s'inscrire</a>
+                {% endif %}
+            </div>
+        </header>
+        <!-- menu -->
+
+
+        <!-- home -->
+          
+      
+                
+        <!-- home -->
+        
+    </section>
+          
+        
+                                    
+                                
+                                  
+                                            
+                                       
+    <div class="container light-style flex-grow-1 container-p-y">
+        <h1 class="font-weight-bold py-3 mb-4">
+           Mon Profil
+        </h1>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                            href="#account-general">Generale</a>
+                        {% comment %} <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="{% url 'update_password' %}">Changer  mot de passe </a> {% endcomment %}
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                            href="#account-info">Info</a>
+                       
+                       
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <div class="card-body media align-items-center">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt
+                                    class="d-block ui-w-80">
+                                <div class="media-body ml-4" >
+                                    <label class="btn btn-outline-primary">
+                                        Changer de photos
+                                        <input type="file" class="account-settings-fileinput">
+                                    </label> &nbsp;
+                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Nom</label>
+                                    <p>{{user.first_name}}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Prénoms</label>
+                                    <p>{{user.last_name}}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">E-mail</label>
+                                    <p>{{user.email}}</p>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-change-password">
+                            <form method=POST>
+                                {% csrf_token %}
+                                {% comment %} <div class="card-body pb-2">
+                                    <div class="form-group">
+                                        <label class="form-label">Ancien mot de passe</label>
+                                        <input type="password" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Nouveau mot de passe </label>
+                                        <input type="password" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Confirmer le nouveau mot de passe </label>
+                                        <input type="password" class="form-control">
+                                    </div>
+                                </div> {% endcomment %}
+                                {{form.as_p}}
+
+                            </form>
+                            
+                        </div>
+                        <div class="tab-pane fade" id="account-info">
+                            <div class="card-body pb-2">
+                               
+                                <div class="form-group">
+                                    <label class="form-label">Adresse</label>
+                                    <p>{{user.profil.adresse}}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Pays</label>
+                                    <p>{{user.profil.pays}}</p>
+                                </div>
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+                                <h6 class="mb-4">Contacts</h6>
+                                <div class="form-group">
+                                    <label class="form-label">Phone</label>
+                                    <p>{{user.profil.number}}</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                            
+                        
+                          
+                                    
+                               
+                                     
+                                
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" mt-3 mx-auto text-center">
+            <button type="button" class="btn btn-primary" style="background-color: #0004ff;">Enregistrer</button>&nbsp;
+            <a href="{% url 'update_password' %}" type="button" class="btn btn-default">Changer mot de passe</a>
+        </div>
+    </div>
+                                         
+                                        
+                      
+            
+                
+        <!-- home -->
+        
+    
+
+     
+     <!-- footer -->
+    <footer>
+        <div class="footer-content">
+            <h1>IMMO-PLUS</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, cum. Vero, explicabo illum. Repudiandae.</p>
+            <h4>Contactez-nous</h4>
+            <ul class="socials">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy;2024 Faiz Dev. Desighed by <span>faiz</span></p>
+        </div>
+        
+    </footer>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+    </script> 
+    <script src="script.js"></script>
+</body>
+</html>

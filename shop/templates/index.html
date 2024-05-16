@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMMO-PLUS</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script >
+        function openNav(){
+            document.getElementById("mySidebar").style.width="100vw";
+            document.querySelector("body").style.overflow= "hidden"
+        
+        }
+        
+        //définir la la largeur de la sidebar a 0  et faire un overflow auto
+        
+        function closeNav(){
+            document.getElementById("mySidebar").style.width="0";
+            document.querySelector("body").style.overflow= "auto"
+        }
+    </script>
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    <section class="header-home">
+        <!-- menu -->
+        <header>
+            <div class="logo_link">
+                <a href="#" class="logo">IMMO-PLUS</a>
+                <div class="menu_link">
+                    <a href="#">Acceuil</a>
+                    <a href="{% url 'services' %}">Service</a>
+                    <a href="{% url 'favoris' %}">Favoris</a>
+                    <a href="{% url 'historique' %}">Historique</a>
+                    <a href="{% url 'user_profil' %}">Profil</a>
+                </div>
+            </div>
+             
+            <!-- responsive menu -->
+                 <div class="sidebar" id="mySidebar">
+                    <div class="closebtn"  onclick="closeNav()">
+                        <img src="images/close.png">
+                    </div>
+                    <a href="#">Acceuil</a>
+                    <a href="{% url 'services' %}">Service</a>
+                    <a href="{% url 'favoris' %}">Favoris</a>
+                    <a href="{% url 'historique' %}">Historique</a>
+                    <a href="{% url 'user_profil' %}">Profil</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'deconnexion' %}" class="orange_link" style="color: white;">deconnexion</a>
+                    {% else %}
+                    <a href="{% url 'singin' %}">Se connecter</a>
+                    <a href="{% url 'singup' %}">s'inscrire</a>
+                    {% endif %}
+                   
+
+                 </div>
+
+                 <div id="main">
+                    <button class="openbtn" onclick="openNav()">
+                        <img src="images/menu.png">
+                        Menu
+                    </button>
+                 </div>
+            <!-- responsive menu -->
+
+            <div class="link_buttons">
+                {% if user.is_authenticated %}
+                <a href="{% url 'deconnexion' %}" class="orange_link">deconnexion</a>
+                {% else %}
+                <a href="{% url 'singin' %}">Se connecter</a>
+                <a href="{% url 'singup' %}" class="orange_link">s'inscrire</a>
+                {% endif %}
+            </div>
+        
+        </header>
+        <!-- menu -->
+
+
+        <!-- home -->
+           <section class="home">
+               <div class="left">
+                   <h1>Explorez les Trésors Immobiliers avec Immo-Plus</h1>
+                   <p>Optimisation et valorisation du patrimoine des biens et service immobilier</p>
+                   {% if user.is_authenticated %}
+                   <a href="{% url 'services' %}" class="orange_link">commencer</a>
+                   {% else %}
+                   <a href="{% url 'singup' %}" class="orange_link">commencer</a>
+                   {% endif %}
+               </div>
+               <div class="right">
+                    <img src="{% static 'images/img1.jpg' %}">
+               </div>
+               <div class="statistiques">
+                   <span>
+                        <h2>450+</h2>
+                        <p>Maisons</p>
+                   </span>
+                   <span>
+                        <h2>120+</h2>
+                        <p>Appartements</p>
+                  </span>
+                  <span>
+                        <h2>160+</h2>
+                        <p>Terrains</p>
+                  </span>
+               </div>
+           </section>
+        <!-- home -->
+    </section>
+
+     <!-- about -->
+    <section class="about">
+        <div class="image">
+            <img src="{% static 'images/img2.jpg' %} ">
+        </div>
+        <div class="content">
+            <h1>à propos de nous</h1>
+            <h2>Nous sélectionnons de beaux et fonctionnels<br> biens pour client depuis 2021.</h2>
+            <p>Chez IMMO-PLUS, nous nous engageons à vous offrir une gamme complète de services immobiliers pour répondre à tous vos besoins. Notre équipe dévouée met son expertise à votre service pour vous accompagner dans toutes les étapes de votre projet immobilier</p>
+        </div>
+              
+    </section>
+     <!-- about -->
+
+    <!-- choice -->
+    <section class="why_us">
+        <h1>Pourquoi nous choisir</h1>
+        <div class="list_box">
+            <div class="box">
+                <img src="{% static 'images/puzzle.png' %}">
+                <h2>Vente et achat</h2>
+                <p>Trouvez la propriété de vos rêves ou vendez votre bien au meilleur prix avec l'aide de nos experts en vente et achat immobilier.</p>
+            </div>
+            <div class="box">
+                <img src="{% static 'images/experience.png' %}">
+                <h2>investissement </h2>
+                <p>Que vous cherchiez à investir dans l'immobilier locatif, les propriétés de prestige ou les projets de développement, nous vous aidons à maximiser votre rendement</p>
+            </div>
+            <div class="box">
+                <img src="{% static 'images/creative-brain.png' %}">
+                <h2>Estimation </h2>
+                <p>Obtenez une estimation précise de la valeur de votre bien immobilier. Nous réalisons une analyse approfondie du marché pour vous fournir une évaluation transparente et fiable.</p>
+            </div>
+            <div class="box">
+                <img src="{% static 'images/customer-service.png' %}">
+                <h2>Conseil </h2>
+                <p> Notre équipe vous accompagne avec professionnalisme et engagement, en mettant toujours vos intérêts au premier plan.</p>
+            </div>
+
+        </div>
+    </section>
+    <!-- choice -->
+
+    <!-- decoration -->
+    <section class="decoration">
+        <h1>liste de decoration</h1>
+        <div class="deco-list">
+            <div class="deco">
+                <img src="{% static 'images/deco1.jpg' %}">
+                <p>decoration de chambre</p>
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing. <br></span>
+                <button class="orange_link">commander une deco</button>
+            </div>
+            <div class="deco">
+                <img src="{% static 'images/deco4.png' %}">
+                <p>decoration de chambre</p>
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing.<br></span>
+                <button class="orange_link">commander une deco</button>
+            </div>
+            <div class="deco">
+                <img src="{% static 'images/deco3.jpg' %}">
+                <p>decoration de chambre</p>
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing.<br></span>
+                <button class="orange_link">commander une deco</button>
+            </div>
+            <div class="deco">
+                <img src="{% static 'images/deco4.png' %}">
+                <p>decoration chambre</p>
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing.<br></span>
+                <button class="orange_link">commander une deco</button>
+            </div>
+            <div class="deco">
+                <img src="{% static 'images/deco5.jpg' %}">
+                <p>decoration chambre</p>
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing.<br></span>
+                <button class="orange_link">commander une deco</button>
+            </div>
+            <div class="deco">
+                <img src="{% static 'images/deco6.jpg' %}">
+                <p>decoration chambre</p>
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing.<br></span>
+                <button class="orange_link">commander une deco</button>
+            </div>
+        </div>
+    </section>  
+     <!-- decoration -->
+     <!-- footer -->
+    <footer>
+        <div class="footer-content">
+            <h1>IMMO-PLUS</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, cum. Vero, explicabo illum. Repudiandae.</p>
+            <h4>contact us</h4>
+            <ul class="socials">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy;2022 Faiz Dev. Desighed by <span>faiz</span></p>
+        </div>
+        
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
