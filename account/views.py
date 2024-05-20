@@ -14,7 +14,7 @@ def singup(request):
         form = ProfilForm(request.POST)
         user_form =UserCreationForm(request.POST)
         
-        if form.is_valid():
+        if form.is_valid() and user_form.is_valid():
             user = user_form.save()  # Sauvegarde l'utilisateur
             profil = form.save(commit=False)
             profil.user = user  # Associe l'utilisateur au profil
