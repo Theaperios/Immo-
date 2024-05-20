@@ -81,6 +81,7 @@
             <!-- Ajouter la classe .custom-form -->
             <form class="custom-form" method="POST">
                 {% csrf_token %}
+                {{form.as_p}}
                 {% comment %} <div class="form-group">
                     {% comment %} <label for="usernameame">Nom d'utilisateur</label> {% endcomment %}
                     {% comment %} <input name= "username" type="text" class="form-control" id="username" aria-describedby="Help"> {% endcomment %}
@@ -91,11 +92,14 @@
                     {% comment %} <input  name ="password" type="password" class="form-control" id="password"> {% endcomment %}
                     {% comment %} {{form.password}} {% endcomment %}
                 {% comment %} </div>  {% endcomment %}
-                {% comment %} <div class="form-group form-check">
+                <a href="{% url 'singup' %}" class="register-link">Pas encore inscrit ? Créez un compte</a>
+                
+ 
+                <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Vérifiez-moi</label>
-                </div> {% endcomment %}
-                {{form.as_p}}
+                </div> 
+              
                 <button type="submit" class="btn btn-primary btn-block">Connexion</button>
             </form>     
         </div>
