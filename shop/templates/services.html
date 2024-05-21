@@ -32,9 +32,12 @@
                 <div class="menu_link">
                     <a href="{% url 'home' %}">Acceuil</a>
                     <a href="#">Service</a>
+                    {% if user.is_authenticated %}
                     <a href="{% url 'favoris' %}">Favoris</a>
                     <a href="{% url 'historique' %}">Historique</a>
                     <a href="{% url 'user_profil' %}">Profil</a>
+                    {% endif %}
+
                 </div>
             </div>
              
@@ -45,11 +48,11 @@
                     </div>
                     <a href="{% url 'home' %}">Acceuil</a>
                     <a href="#">Service</a>
+                    {% if user.is_authenticated %}
                     <a href="{% url 'favoris' %}">Favoris</a>
                     <a href="{% url 'historique' %}">Historique</a>
                     <a href="{% url 'user_profil' %}">Profil</a>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'deconnexion' %}">deconnexion</a>
+                    <a href="{% url 'deconnexion' %}" class="orange_link" style="color: white;">deconnexion</a>
                     {% else %}
                     <a href="{% url 'singin' %}">Se connecter</a>
                     <a href="{% url 'singup' %}">s'inscrire</a>
