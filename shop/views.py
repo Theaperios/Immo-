@@ -64,16 +64,21 @@ def rdv(request, product_id):
             "product":product
             
         }
-        consult=consultation.objects.create(**data)
-        subjet="Confirmation du RDV"
-        message=f"Votre rendez-vous avec l'agence IMMO-PLUS est confirmé. Nous vous attendons pour le {consult.date} à {consult.heure}. "
-        destinataire=[user.email]
-        send_email(subjet,message,destinataire)
-        if consult:
-            messages.success(request,f"Merci M/Mme {user.first_name}, votre demande de rendez-vous pour le {consult.date} à {consult.heure} a bien été pris en compte. Vous recevrez une confirmation par mail ou par appel. ")
+        date=data["date"]
+        produit_favoris_exist= consultation.objects.filter(product=product,user=user, date=date).exists() 
+        if not produit_favoris_exist:
+            consult=consultation.objects.create(**data)
+            subjet="Confirmation du RDV"
+            message=f"Votre rendez-vous avec l'agence IMMO-PLUS est confirmé. Nous vous attendons pour le {consult.date} à {consult.heure}. "
+            destinataire=[user.email]
+            send_email(subjet,message,destinataire)
+            if consult:
+                messages.success(request,f"Merci M/Mme {user.first_name}, votre demande de rendez-vous pour le {consult.date} à {consult.heure} a bien été pris en compte. Vous recevrez une confirmation par mail ou par appel. ")
+            else:
+                messages.error(request,"Formulaire invalide")    
                
-    else:
-        messages.error(request,"Formulaire incorrect.")
+        else:
+            messages.info(request,"Ce RDV existe déjà.")
     return render(request,"rdv.html")
 
 

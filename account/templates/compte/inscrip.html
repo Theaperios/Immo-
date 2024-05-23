@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +6,103 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script >
+        function openNav(){
+            document.getElementById("mySidebar").style.width="100vw";
+            document.querySelector("body").style.overflow= "hidden"
+        
+        }
+        
+        //définir la la largeur de la sidebar a 0  et faire un overflow auto
+        
+        function closeNav(){
+            document.getElementById("mySidebar").style.width="0";
+            document.querySelector("body").style.overflow= "auto"
+        }
+    </script>
+
     <!-- Ajouter un lien vers Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Ajouter du CSS personnalisé -->
     <style>
+
+        /*style header*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+body {
+    transition: 0.5s;
+}
+a{
+    text-decoration: 0;
+}
+.header-home {
+    background-color: #FAF8F4;
+    position: relative;
+}
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 35px 0;
+    text-transform: capitalize;
+}
+
+/* menu */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background-color:#a1a3ff;
+}
+.logo {
+    text-transform: capitalize;
+    color: #0004ff;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+header .logo_link {
+    display: flex;
+    align-items: center;
+}
+.menu_link {
+    margin-left: 60px;
+}
+.menu_link a {
+    margin: 0 10px;
+    font-size: 15px;
+    color:#292929;
+}
+.menu_link a:first-child {
+    color:#292929;
+}
+.link_buttons a{
+    margin-left: 15px;
+}
+.link_buttons a:first-child {
+    color: #0004ff;
+}
+.orange_link {
+    color: #fff;
+    padding: 8px 30px;
+    background-color: #0004ff;
+    border-radius: 4px;
+    text-transform: capitalize;
+}
+
+
+
         /* Définir la couleur de fond en bleu ciel très léger */
         body {
             background-color: #FAF8F4; /* Utilisation de la valeur hexadécimale */
@@ -61,6 +154,70 @@
 </head>
 
 <body>
+
+    <!------------------------------------ Header------------------------------------>
+
+
+    <header>
+        <div class="logo_link">
+            <a href="#" class="logo">IMMO-PLUS</a>
+            <div class="menu_link">
+                <a href="{% url 'home' %}">Acceuil</a>
+                <a href="{% url 'services' %}">Service</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'favoris' %}">Favoris</a>
+                <a href="{% url 'historique' %}">Historique</a>
+                <a href="{% url 'user_profil' %}">Profil</a>
+                {% endif %}
+
+            </div>
+        </div>
+         
+        <!-- responsive menu -->
+             <div class="sidebar" id="mySidebar">
+                <div class="closebtn"  onclick="closeNav()">
+                    <img src="images/close.png">
+                </div>
+                <a href="{% url 'home' %}">Acceuil</a>
+                <a href="{% url 'services' %}">Service</a>
+            
+                {% if user.is_authenticated %}
+                <a href="{% url 'favoris' %}">Favoris</a>
+                <a href="{% url 'historique' %}">Historique</a>
+                <a href="{% url 'user_profil' %}">Profil</a>
+                <a href="{% url 'deconnexion' %}" class="orange_link" style="color: white;">deconnexion</a>
+                {% else %}
+                <a href="{% url 'singin' %}">Se connecter</a>
+                <a href="{% url 'singup' %}">s'inscrire</a>
+                {% endif %}
+               
+
+             </div>
+
+             <div id="main">
+                <button class="openbtn" onclick="openNav()">
+                    <img src="images/menu.png">
+                    Menu
+                </button>
+             </div>
+        <!-- responsive menu -->
+
+        <div class="link_buttons">
+            {% if user.is_authenticated %}
+            <a href="{% url 'deconnexion' %}" class="orange_link">deconnexion</a>
+            {% else %}
+            <a href="{% url 'singin' %}">Se connecter</a>
+            <a href="{% url 'singup' %}" class="orange_link">s'inscrire</a>
+            {% endif %}
+        </div>
+    
+    </header>
+
+
+
+    <!------------------------------------ fin header------------------------------------>
+
+
     <h1 class="text-center custom-title">BIENVENUE CHEZ IMMO+</h1><br>
     <div class="custom-container">
         <div class="col-lg-6 shadow p-4">
