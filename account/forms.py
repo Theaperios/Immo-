@@ -132,6 +132,51 @@ class add_favoris_form(forms.ModelForm):
 class consult_form(forms.ModelForm):
     class Meta:
         model = consultation
-        fields = ["date", "heure", "commentaire"]        
+        fields = ["date", "heure", "commentaire"]     
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["date"].widget.attrs.update(
+             {
+                "class":"form-control",
+                "name":"date" 
+             }   
+        )
+        
+        
+        self.fields["heure"].widget.attrs.update(
+             {
+                "class":"form-control",
+             }   
+        )
+        
+        self.fields["commentaire"].widget.attrs.update(
+             {
+                "class":"form-control",
+             }   
+        )       
            
                 
+from django import forms
+from django.contrib.auth.models import User
+from shop.models import profil
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
+
+class update_ProfilForm(forms.ModelForm):
+    class Meta:
+        model = profil
+        fields = ['number', 'pays', 'adresse']
+        widgets = {
+            'number': forms.TextInput(attrs={'class': 'form-control'}),
+            'pays': forms.TextInput(attrs={'class': 'form-control'}),
+            'adresse': forms.TextInput(attrs={'class': 'form-control'}),
+        }

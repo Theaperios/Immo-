@@ -84,7 +84,54 @@ def update_password(request):
     
     return render(request,"compte/password.html",{"form":form})
 
-    
+def update_user(request):
+    user=request.user
+    if request.method == "POST":
+        form = ProfilForm(request.POST, isinstance=user)
+        user_form =UserCreationForm(request.POST, isinstance=user.profil)
+        
+        if form.is_valid() and user_form.is_valid():
+            user = user_form.save()  # Sauvegarde l'utilisateur
+            profil = form.save(commit=False)
+            profil.user = user  # Associe l'utilisateur au profil
+            profil.save()  # Enregistre le profil
+            
+            usernam = user_form.cleaned_data["username"]
+            passwor = user_form.cleaned_data["password"]
+            user_log = authenticate(request, username=usernam, password=passwor)    
+            if user_log is not None:
+                login(request, user_log)
+                return redirect("home")
+        else:
+            messages.error(request,'Formulaire invalide.')
+            # Redirection ou autre action après l'enregistrement réussi
+    else:
+        # Si la requête n'est pas de type POST, afficher les formulaires vides
+        form = ProfilForm()
+        user_form = UserCreationForm()
+    return render(request,'compte/inscrip.html', {"form":form, "user":user_form})
 
+    
+def update_profil(request):
+    try:
+        profil = request.user.profil
+    except profil.DoesNotExist:
+        profil = profil(user=request.user)
+    
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profil_form = update_ProfilForm(request.POST, instance=profil)
+        if user_form.is_valid() and profil_form.is_valid():
+            user_form.save()
+            profil_form.save()
+            return redirect('user_profil')  # Rediriger vers une page de détail de profil ou une autre page de votre choix
+    else:
+        user_form = UserForm(instance=request.user)
+        profil_form = update_ProfilForm(instance=profil)
+
+    return render(request, 'compte/update_profil.html', {
+        'user_form': user_form,
+        'profil_form': profil_form
+    })
         
 

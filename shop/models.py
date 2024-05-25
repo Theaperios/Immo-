@@ -43,6 +43,7 @@ class profil(models.Model):
     number= models.IntegerField()
     pays= models.CharField(max_length=250)
     adresse=models.CharField(max_length=500)
+    photo=models.FileField(upload_to="photo_user", null=True)
     
 class consultation(models.Model):
     date = models.DateField()

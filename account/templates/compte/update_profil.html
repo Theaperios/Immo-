@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    .username{
+        background-color: brown;
+    }
+
+</style>    
+
+</head>
+<body>
+
+<h2>Mettre à jour le profil</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset>
+      <legend>Informations Utilisateur</legend>
+      {% comment %} <div class="media-body ml-4" >
+                                   
+        <label class="btn btn-outline-primary">
+            Changer de photos
+            <input type="file" class="account-settings-fileinput" name="user_photo">
+        </label> &nbsp;
+        <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+    </div> {% endcomment %}
+      {{ user_form.as_p }}
+      {{ profil_form.as_p }}
+      
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+  </form>
+
+
+</body>
+</html>

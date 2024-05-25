@@ -8,6 +8,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMMO-PLUS</title>
     <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+
+    <style>
+        @media screen and (max-width: 768px) {
+            .menu_link {
+                display: none;
+            }
+        
+            .link_buttons {
+                display: none;
+            }
+        
+            .openbtn {
+                display: block;
+            }
+        
+            .product-card img {
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        @media screen and (min-width: 769px) {
+            .openbtn {
+                display: none;
+            }
+        
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
     <script >
         function openNav(){
             document.getElementById("mySidebar").style.width="100vw";

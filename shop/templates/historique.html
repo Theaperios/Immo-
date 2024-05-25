@@ -107,7 +107,7 @@
                 <table class="table">
                     <thead class="thead-primary">
                         <tr>
-                            <th scope="col">#</th>
+                            {% comment %} <th scope="col">#</th> {% endcomment %}
                             <th scope="col">Date</th>
                             <th scope="col">Heure</th>
                             <th scope="col">Titre du bien</th>
@@ -117,7 +117,7 @@
                     <tbody>
                         {% for historique in user_historique %}
                         <tr>
-                            <th scope="row">{{ historique.id }}</th>
+                            {% comment %} <th scope="row">{{ historique.id }}</th> {% endcomment %}
                             <td>{{ historique.date }}</td>
                             <td>{{ historique.heure }}</td>
                             <td>{{ historique.product.title }}</td>

@@ -131,6 +131,11 @@ def annuler_consultation(request):
         consultation_a_annuler.delete()
     return redirect("historique")
             
+
+# class  profil_update(UpdateView):
+   
+#     template_name = "profil2.html"
+#     success_url = reverse_lazy('profil')            
      
 
 
