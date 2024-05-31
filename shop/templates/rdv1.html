@@ -1,45 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulaire de Rendez-vous</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 20px;
+            position: relative;
         }
         .container {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .close-page {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 28px;
+            color: #aaa;
+            cursor: pointer;
+        }
+        .close-page:hover,
+        .close-page:focus {
+            color: black;
         }
     </style>
 </head>
 <body>
-    <form id="rdvForm"  method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="date_rdv">Date du rendez-vous :</label>
-            <!-- <input name="date" type="date" class="form-control" id="date_rdv" name="date_rdv" min="2024-04-22" required> -->
-            {{form.date}}
-        </div>
-        <div class="form-group">
-            <label for="heure_rdv">Heure du rendez-vous :</label>
-            <!-- <input name="heure" type="time" class="form-control" id="heure_rdv" name="heure_rdv" required> -->
-            {{form.heure}}
-        </div>
-        <div class="form-group">
-            <label for="Commentaire">Commentaire :</label>
-            <!-- <textarea name="commentaire" class="form-control" id="commentaire" name="commetaire" rows="3"></textarea> -->
-            {{form.commentaire}}
-        </div>
-        <button type="submit" class="btn btn-primary">Confirmer le rendez-vous</button>
-    </form>
-</div>
-    
+    <div class="container">
+        <h2>Formulaire de Rendez-vous</h2>
+        {% for message in messages %}
+            <div class="alert {{message.tags}} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{message|safe}}
+            </div>
+        {% endfor %}
+        <form id="rdvForm" method="POST">
+            {% csrf_token %}
+            <span class="close-page" id="closePage">&times;</span>
+            <div class="form-group">
+                <label for="date_rdv">Date du rendez-vous :</label>
+                {% comment %} <input name="date" type="date" class="form-control" id="date_rdv" min="2024-04-22" required> {% endcomment %}
+                {{form.date}}
+            </div>
+            <div class="form-group">
+                <label for="heure_rdv">Heure du rendez-vous :</label>
+                {% comment %} <input name="heure" type="time" class="form-control" id="heure_rdv" required> {% endcomment %}
+                {{form.heure}}
+            </div>
+            <div class="form-group">
+                <label for="Commentaire">Commentaire :</label>
+                {% comment %} <textarea name="commentaire" class="form-control" id="commentaire" rows="3"></textarea> {% endcomment %}
+                {{form.commentaire}}
+            </div>
+            <button type="submit" class="btn btn-primary">Confirmer le rendez-vous</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Validation de base du formulaire côté client avec JavaScript
+        document.getElementById("rdvForm").addEventListener("submit", function(event) {
+            var dateInput = document.getElementById("date_rdv").value;
+            var timeInput = document.getElementById("heure_rdv").value;
+            var currentDate = new Date();
+            var selectedDate = new Date(dateInput + "T" + timeInput);
+            if (selectedDate <= currentDate) {
+                alert("Veuillez sélectionner une date et une heure futures.");
+                event.preventDefault();
+            }
+        });
+
+        // Close page functionality
+        document.getElementById("closePage").addEventListener("click", function() {
+            window.history.back();
+        });
+    </script>
 </body>
 </html>

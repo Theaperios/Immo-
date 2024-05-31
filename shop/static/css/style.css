@@ -11,9 +11,29 @@ body {
 a{
     text-decoration: 0;
 }
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #FAF8F4; /* Assurez-vous que cette couleur correspond à celle de votre header */
+    z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optionnel : pour ajouter une ombre */
+}
+
+.header-home {
+    padding-top: 80px; /* Ajustez cette valeur selon la hauteur de votre header */
+}
+
+
 .header-home {
     background-color: #FAF8F4;
     position: relative;
+    
 }
 h1 {
     font-size: 60px;
@@ -29,6 +49,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px 10%;
+   
 }
 .logo {
     text-transform: capitalize;
@@ -181,7 +202,7 @@ header .logo_link {
 }
 .list_box .box {
     text-align: center;
-    background-color: #FAF8F4;
+    background-color: #a1a3ff;
     border-radius: 4px;
     padding: 50px 25px;
     margin: 10px;
@@ -241,11 +262,11 @@ header .logo_link {
     transition: 0.5s;
     cursor: pointer;
 }
-.deco-list .deco .orange_link:hover {
+/* .deco-list .deco .orange_link:hover {
     background-color: transparent;
     color:#0004ff;
     
-}
+} */
 /*footer*/
 footer {
     margin-top: 60px;

@@ -10,6 +10,8 @@ from django.contrib.auth.models import AbstractUser
 class Category(models.Model):
     name=models.CharField(max_length=200)
     date_added= models.DateTimeField(auto_now=True)
+    image = models.FileField(upload_to='image_categorie/', null=True)
+    description = models.TextField(null=True)
     
     class Meta:
         ordering = ['-date_added']

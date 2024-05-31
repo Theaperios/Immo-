@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Product, consultation, favoris
+from .models import Product, consultation, favoris, Category
 from django.contrib import messages
 from .utils import send_email
 from account.forms  import add_favoris_form, consult_form
@@ -12,7 +12,17 @@ from django.views.generic import UpdateView
 
 # Create your views here.
 def index(request):
-  return render(request,"index.html")
+  categorie = Category.objects.all()
+  contexte = {
+      "categorie":categorie
+  }
+  return render(request,"index.html",contexte)
+
+
+def maison_par_categorie(request,categorie_id):
+    categorie = Category.objects.get(id=categorie_id)
+    produit = Product.objects.filter(category=categorie)
+    return render(request,"services.html",{"produit":produit})
 
   
 def services(request):
@@ -69,7 +79,7 @@ def rdv(request, product_id):
         if not produit_favoris_exist:
             consult=consultation.objects.create(**data)
             subjet="Confirmation du RDV"
-            message=f"Votre rendez-vous avec l'agence IMMO-PLUS est confirmé. Nous vous attendons pour le {consult.date} à {consult.heure}. "
+            message=f"Merci M/Mme {user.first_name},votre rendez-vous avec l'agence IMMO-PLUS est confirmé. Nous vous attendons pour une consultation le {consult.date} à {consult.heure}. "
             destinataire=[user.email]
             send_email(subjet,message,destinataire)
             if consult:
@@ -132,11 +142,7 @@ def annuler_consultation(request):
     return redirect("historique")
             
 
-# class  profil_update(UpdateView):
-   
-#     template_name = "profil2.html"
-#     success_url = reverse_lazy('profil')            
-     
+
 
 
 

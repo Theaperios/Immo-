@@ -106,9 +106,9 @@ class UserCreationForm(forms.ModelForm):
         return user      
 
 class change_password(forms.Form):
-          last_password=forms.CharField(label="ancien_mdp",widget=forms.PasswordInput)
-          new_password=forms.CharField(label="nouveau_mdp", widget=forms.PasswordInput)
-          confirm_password=forms.CharField(label="confirm_mdp",widget=forms.PasswordInput)
+          last_password=forms.CharField(label="Ancien mot de passe",widget=forms.PasswordInput)
+          new_password=forms.CharField(label="Nouveau mot de passe ", widget=forms.PasswordInput)
+          confirm_password=forms.CharField(label="Confirmer mot de passe",widget=forms.PasswordInput)
           
           def clean(self):
               cleaned_data=super().clean()
@@ -138,7 +138,13 @@ class consult_form(forms.ModelForm):
         self.fields["date"].widget.attrs.update(
              {
                 "class":"form-control",
-                "name":"date" 
+                "name":"date",
+                "type":"date",
+                "class":"form-control",
+                "id":"date_rdv",
+                "name":"date_rdv",
+                "min":"2024-04-22",
+                
              }   
         )
         
@@ -146,12 +152,22 @@ class consult_form(forms.ModelForm):
         self.fields["heure"].widget.attrs.update(
              {
                 "class":"form-control",
+                 "name":"heure",
+                 "type":"time",
+                 "class":"form-control",
+                 "id":"heure_rdv",
+                 "name":"heure_rdv",
              }   
         )
         
         self.fields["commentaire"].widget.attrs.update(
              {
                 "class":"form-control",
+                "name":"commentaire",
+                "class":"form-control",
+                "id":"commentaire",
+                "name":"commetaire",
+                "rows":"3"
              }   
         )       
            

@@ -4,37 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
 
-<style>
-    .username{
-        background-color: brown;
+
+
+      .popup-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        position: relative;
     }
+    
+    .popup-header,
+    .popup-footer {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .popup-footer {
+        border-top: 1px solid #ddd;
+        text-align: right;
+    }
+    
+    .popup-body {
+        padding: 20px;
+    }
+    
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #0004ff; /* Nouvelle couleur spécifiée */
+    }
+    
+    .close-btn:hover {
+        color: #0004ff; /* Nouvelle couleur spécifiée */
+    }
+    
+    h5.modal-title {
+        color: #0004ff; /* Nouvelle couleur spécifiée */
+    }
+    
+    .btn-primary {
+        background-color: #0004ff; /* Nouvelle couleur spécifiée */
+        border: none;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0004ff; /* Nouvelle couleur spécifiée */
+    }
+    
+    .form-group label {
+        color: #0004ff; /* Nouvelle couleur spécifiée */
+    }
+    
+    .form-control {
+        border: 1px solid #ced4da; /* Couleur de la bordure des champs */
+    }
+    
+    .form-control:focus {
+        border-color: #0004ff; /* Nouvelle couleur spécifiée */
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25); /* Effet de focus */
+    }
+    
 
-</style>    
+    
 
+    </style>
 </head>
 <body>
 
-<h2>Mettre à jour le profil</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <fieldset>
-      <legend>Informations Utilisateur</legend>
-      {% comment %} <div class="media-body ml-4" >
-                                   
-        <label class="btn btn-outline-primary">
-            Changer de photos
-            <input type="file" class="account-settings-fileinput" name="user_photo">
-        </label> &nbsp;
-        <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-    </div> {% endcomment %}
-      {{ user_form.as_p }}
-      {{ profil_form.as_p }}
-      
-    </fieldset>
-    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-  </form>
+<div class="popup-container">
+    <button class="close-btn" onclick="closePopup()">&times;</button>
+    <div class="popup-header">
+        <h5 class="modal-title">Mettre à jour le profil</h5>
+    </div>
+    <div class="popup-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Informations Utilisateur</legend>
+                {{ user_form.as_p }}
+                {{ profil_form.as_p }}
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        </form>
+    </div>
+</div>
 
+<script>
+    function closePopup() {
+        window.history.back();
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

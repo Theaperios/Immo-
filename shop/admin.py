@@ -4,7 +4,7 @@ from .models import Category, Product, profil,consultation, favoris
 # Register your models here.
 
 class AdminCategorie(admin.ModelAdmin):
-    list_display= ('name','date_added')
+    list_display= ('name','date_added','description')
 
 class AdminProduct(admin.ModelAdmin):
     list_display=('title','lot','price','category','date_added')
