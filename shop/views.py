@@ -5,6 +5,7 @@ from .utils import send_email
 from account.forms  import add_favoris_form, consult_form
 from django.views import View
 from django.views.generic import UpdateView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 #from django.contrib.auth.decorators import login_required
 #login_required  # Assure que seul un utilisateur connecté peut ajouter un produit aux favoris
@@ -12,7 +13,7 @@ from django.views.generic import UpdateView
 
 # Create your views here.
 def index(request):
-  categorie = Category.objects.all()
+  categorie = Category.objects.all()[:3]
   contexte = {
       "categorie":categorie
   }
@@ -22,15 +23,27 @@ def index(request):
 def maison_par_categorie(request,categorie_id):
     categorie = Category.objects.get(id=categorie_id)
     produit = Product.objects.filter(category=categorie)
-    return render(request,"services.html",{"produit":produit})
+    paginator = Paginator(produit, 16)
+    page = request.GET.get("page")
+    try:
+        produit = paginator.page(page)
+    except PageNotAnInteger:
+        produit = paginator.page(1)
+    except EmptyPage:
+        produit = paginator.page(paginator.num_pages)        
+    return render(request,"maison_par_categorie.html",{"produit":produit})
 
   
 def services(request):
-    product_object = Product.objects.all()
-    item_name = request.GET.get('item-name')
-    if item_name !='' and item_name is not None:
-        product_object=Product.objects.filter(title__icontains=item_name)
-    return render(request,"services.html",{'product_object': product_object})
+    categorie = Category.objects.all()
+    contexte = {
+      "categorie":categorie
+  }
+    # product_object = Product.objects.all()
+    # item_name = request.GET.get('item-name')
+    # if item_name !='' and item_name is not None:
+    #     product_object=Product.objects.filter(title__icontains=item_name)
+    return render(request,"services.html",contexte)
 
 def detail(request, myid):
     product_object = Product.objects.get(id=myid)

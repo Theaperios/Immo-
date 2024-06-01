@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMMO-PLUS</title>
     <link rel="stylesheet" href="{% static 'css/style2.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
 
     <style>
         @media screen and (max-width: 768px) {
@@ -114,24 +112,24 @@
 
         <!-- home -->
           
-        {% comment %} <div class="col-md-12 mx-auto"> <!-- Ajoutez la classe mx-auto pour centrer le formulaire -->
-            <form  id="rechercher" class="card card-sm d-flex align-items-center" method ="get" > <!-- Ajoutez les classes pour disposer les éléments en ligne -->
+        <div class="col-md-12 mx-auto"> <!-- Ajoutez la classe mx-auto pour centrer le formulaire -->
+            <div  id="rechercher" class="card card-sm d-flex align-items-center"> <!-- Ajoutez les classes pour disposer les éléments en ligne -->
                 <div class="card-body row no-gutters align-items-center">
                     <div class="col">
-                        <input type="search" placeholder="Entrez le type de bien que vous cherchez" name="item-name" class="form-control form-control-borderless  ">
+                        <input  id= "recherche" type="search" placeholder="Entrez le type de bien que vous cherchez" name="item-name" class="form-control form-control-borderless  ">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mr-0  ">Recherche</button> <!-- Ajoutez la classe mr-0 pour supprimer la marge à droite -->
                     </div>
                 </div>
-            </form>
-        </div> {% endcomment %}
+            </div>
+        </div>
         
         
         <div class="text-center mt-4 mx-3 my-4 p-4  bg-white"> 
             
-                {% comment %} <div class="row mt-4">
-                    {% for product in product_object %}
+                <div class="row mt-4">
+                    {% for product in produit %}
                     <div class="col-md-3 mb-4">
                         <div class="card shadow product-card">
                             <div class="text-center shadow">
@@ -151,23 +149,8 @@
                         </div>
                     </div>
                     {% endfor %}
-                </div> {% endcomment %}
-
-                <section class="decoration">
-                    <h1>Nos catégories</h1>
-                    <div class="deco-list">
-                        {% for categorie in categorie %}
-                        <a href="{% url 'maison_par_categorie' categorie.id %}">
-                            <div class="deco">
-                                <img src="../media/{{categorie.image}}">
-                                <p>{{categorie.name}}</p>
-                                <span>{{categorie.description}} <br></span>
-                                <button class="orange_link">faites nous confiance</button>
-                            </div>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </section> 
+                </div>
+                {% include "C:\Users\utilisateur\Documents\Projet Genie Logiciel\ProjetDjango\ImmoApp\shop\templates\layout\pagination.html" with page=produit %}
         
            
            
@@ -179,6 +162,7 @@
         <!-- home -->
         
     </section >
+      
    
    
 
@@ -214,6 +198,33 @@
         
     </footer>
     <script src="script.js"></script>
+
+    <script>
+        function searchProduit() {
+            // Récupérer la valeur saisie dans le champ de recherche
+            var input = document.getElementById('recherche');
+            var filter = input.value.toUpperCase();
+    
+            // Sélectionner les éléments à filtrer
+            var produit = document.getElementsByClassName('product-card');
+    
+            // Parcourir tous les éléments, masquer ceux qui ne correspondent pas à la recherche
+            for (var i = 0; i < produit.length; i++) {
+                var product = produit[i];
+                var productName = product.querySelector('.card-title');
+                if (productName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    product.style.display = '';
+                } else {
+                    product.style.display = 'none';
+                }
+            }
+        }
+    
+        // Ajouter un événement de saisie pour déclencher la recherche à chaque fois que l'utilisateur tape quelque chose
+        document.getElementById('recherche').addEventListener('input', searchProduit);
+    </script>
+
+
 </body>
 
 </html>

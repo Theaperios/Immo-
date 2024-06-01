@@ -23,6 +23,8 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200)
     price = models.DecimalField(decimal_places=2, max_digits=1000)
+    nombre_piece = models.IntegerField(default=3)
+    adresse= models.CharField(default="Abidjan", max_length=40)
     description = models.TextField()
     category = models.ForeignKey(Category, related_name='categorie', on_delete=models.CASCADE)
     image =models.FileField(upload_to='images/',default="1.jpg", null= True)

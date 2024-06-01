@@ -262,6 +262,30 @@ header .logo_link {
     transition: 0.5s;
     cursor: pointer;
 }
+
+.voir {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.voir {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-left: 700px;
+}
+
+.voir:hover {
+    background-color: darkblue;
+}
+
 /* .deco-list .deco .orange_link:hover {
     background-color: transparent;
     color:#0004ff;
@@ -311,7 +335,7 @@ footer {
     color: #000;
 }
 .footer-bottom {
-    background-color: #333;
+    background-color:  #8c8efe;
     color: #fff;
     padding: 10px 0;
     text-align: center;
