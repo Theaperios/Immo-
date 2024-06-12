@@ -23,6 +23,7 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200)
     price = models.DecimalField(decimal_places=2, max_digits=1000)
+    statut = models.CharField(default="A vendre",max_length=20)
     nombre_piece = models.IntegerField(default=3)
     adresse= models.CharField(default="Abidjan", max_length=40)
     description = models.TextField()

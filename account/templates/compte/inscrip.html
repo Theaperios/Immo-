@@ -255,47 +255,47 @@ header .logo_link {
             <form class="custom-form" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="exampleInputName">Nom</label>
+                    <label for="exampleInputName">Nom *</label>
                     {% comment %} <input type="text" name ="nom" class="form-control" id="exampleInputName"> {% endcomment %}
                     {{user.first_name}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputLastName">Prénom</label>
+                    <label for="exampleInputLastName">Prénom *</label>
                     {% comment %} <input type="text" name="prenom" class="form-control" id="exampleInputLastName"> {% endcomment %}
                     {{user.last_name}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputUsername">Nom d'utilisateur</label>
+                    <label for="exampleInputUsername">Nom d'utilisateur *</label>
                     {% comment %} <input type="text" name="username" class="form-control" id="exampleUsername"> {% endcomment %}
                     {{user.username}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPhone">Numéro de téléphone</label>
+                    <label for="exampleInputPhone">Numéro de téléphone *</label>
                     {% comment %} <input name="numero" type="tel" class="form-control" id="exampleInputPhone"> {% endcomment %}
                     {{form.number}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputAddress">Adresse</label>
+                    <label for="exampleInputAddress">Adresse *</label>
                     {% comment %} <input name="adresse" type="text" class="form-control" id="exampleInputAddress"> {% endcomment %}
                     {{form.adresse}}
                 </div>
                 <div>
-                    <label for="exampleInputCountry">Pays</label>
+                    <label for="exampleInputCountry">Pays *</label>
                     {% comment %} t name="pays" type="text" class="form-control" id="exampleInputCountry">  {% endcomment %}
                     {{form.pays}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail">Adresse e-mail</label>
+                    <label for="exampleInputEmail">Adresse e-mail *</label>
                     {% comment %} <input name= "email" type="email" class="form-control" id="exampleInputEmail"> {% endcomment %}
                     {{user.email}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword">Mot de passe</label>
+                    <label for="exampleInputPassword">Mot de passe *</label>
                     {% comment %} <input name="pass1" type="password" class="form-control" id="exampleInputPassword"> {% endcomment %}
                     {{user.password}}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputConfirmPassword">Confirmer le mot de passe</label>
+                    <label for="exampleInputConfirmPassword">Confirmer le mot de passe *</label>
                     <input name="pass2" type="password" class="form-control" id="exampleInputConfirmPassword">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>

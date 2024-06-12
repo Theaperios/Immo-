@@ -172,6 +172,8 @@ header .logo_link {
             width: 690px;
             margin-right: 20px;
         }
+
+              
     </style>
 </head>
 
@@ -240,7 +242,7 @@ header .logo_link {
     <h1 class="text-center">BIENVENUE CHEZ IMMO+</h1>
     {% if user.is_authicated %}<h1>Bienvenue {{user.first_name}}</h1>{% endif %}
     <div class="custom-container " >
-      <img src="https://vss.astrocenter.fr/habitatpresto/pictures/29764903-mesut-ozil.jpg" alt="" class="img-fluid img-responsive  ">
+      <img src="https://vss.astrocenter.fr/habitatpresto/pictures/29764903-mesut-ozil.jpg" alt="" class="img-fluid img-responsive">
         <div class="col-lg-6 shadow p-4">
             <h3 class=" text text-center">Connexion</h3>
             {% for message in messages %}
